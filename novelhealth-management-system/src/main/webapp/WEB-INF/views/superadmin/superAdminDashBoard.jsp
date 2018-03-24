@@ -13,7 +13,6 @@
 
 			<!-- superadmin side menu content -->
 			<%@include file="superadmin_includes/superAdminSideMenu.jsp"%>
-
 		</div>
 		<div class="main-content">
 			<!-- super admin body content-->
@@ -24,7 +23,7 @@
 			</h3>
 			<div class="row" style="height: 10cm;">
 				<div class="col-sm-3">
-					<a href="http://creativeitem.com/demo/bayanno/index.php?admin/doctor">
+					<a href="http://creativeitem.com/demo/bayanno/index.php?admin/doctor"></a>
 						<div class="tile-stats tile-white tile-white-primary">
 							<div class="icon">
 								<i class="fa fa-user-md"></i>
@@ -32,11 +31,11 @@
 							<div class="num" data-start="0" data-end="${totalhospitals}" data-duration="1500" data-delay="0">${totalhospitals}</div>
 							<h3>Hospitals</h3>
 						</div>
-					</a>
+					
 				</div>
 
 				<div class="col-sm-3">
-					<a href="http://creativeitem.com/demo/bayanno/index.php?admin/patient">
+					<a href="http://creativeitem.com/demo/bayanno/index.php?admin/patient"></a>
 						<div class="tile-stats tile-white-red">
 							<div class="icon">
 								<i class="fa fa-user"></i>
@@ -44,7 +43,7 @@
 							<div class="num" data-start="0" data-end="${totaladmins}" data-duration="1500" data-delay="0">1</div>
 							<h3>Admins</h3>
 						</div>
-					</a>
+					
 				</div>
 			</div>
 

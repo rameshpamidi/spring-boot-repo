@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.dotridge.nhc.model.BranchBean;
 import com.dotridge.nhc.model.HospitalBean;
@@ -36,7 +37,8 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/addhospitalpage" }, method = RequestMethod.GET)
-	public String addHospitalPage(Model model) {
+	public String addHospitalPage(Model model, @SessionAttribute("name") String name) {
+		model.addAttribute("name", name);
 		model.addAttribute("hospitalForm", new HospitalBean());
 		return "superadmin/addHospitalPage";
 	}
@@ -54,7 +56,7 @@ public class HospitalController {
 	 */
 	@RequestMapping(value = { "/addhospital" }, method = RequestMethod.POST)
 	public String addHospitalHandler(@Valid @ModelAttribute("hospitalForm") HospitalBean hospitalForm,
-			BindingResult result, Model model) {
+			BindingResult result, Model model, @SessionAttribute("name") String name) {
 		String viewPage = null;
 		if (result.hasErrors()) {
 			viewPage = "superadmin/addHospitalPage";
@@ -62,7 +64,8 @@ public class HospitalController {
 		} else {
 			HospitalBean hospital = hospitalService.addHospital(hospitalForm);
 			if (hospital != null) {
-				viewPage = viewAllHospitalsPage(model);
+
+				viewPage = viewAllHospitalsPage(model, name);
 			}
 		}
 
@@ -79,8 +82,10 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/edithospitalpage" }, method = RequestMethod.GET)
-	public String editHospitalPage(@RequestParam("hospId") int hospId, Model model) {
+	public String editHospitalPage(@RequestParam("hospId") int hospId, Model model,
+			@SessionAttribute("name") String name) {
 		model.addAttribute("hospitalForm", hospitalService.getHospitalById(hospId));
+		model.addAttribute("name", name);
 		return "superadmin/editHospitalPage";
 	}
 
@@ -94,13 +99,17 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/edithospital" }, method = RequestMethod.POST)
-	public String editHospitalHandler(@Valid @ModelAttribute("hospitalForm") HospitalBean hospitalForm, Model model) {
+	public String editHospitalHandler(@Valid @ModelAttribute("hospitalForm") HospitalBean hospitalForm, Model model,
+			@SessionAttribute("name") String name) {
 		String viewPage = null;
 		HospitalBean updatedHospital = hospitalService.updateHospital(hospitalForm);
-		if (updatedHospital != null)
-			viewPage = viewAllHospitalsPage(model);
-		else
+		if (updatedHospital != null) {
+
+			viewPage = viewAllHospitalsPage(model, name);
+		} else {
+			model.addAttribute("name", name);
 			viewPage = "superadmin/editHospitalPage";
+		}
 		return viewPage;
 	}
 
@@ -112,7 +121,7 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/viewallhospitals" }, method = RequestMethod.GET)
-	public String viewAllHospitalsPage(Model model) {
+	public String viewAllHospitalsPage(Model model, @SessionAttribute("name") String name) {
 		model.addAttribute("hospitals", hospitalService.getAllHospitals());
 		return "superadmin/viewHospitalsPage";
 	}
@@ -127,9 +136,10 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/deletehospital" }, method = RequestMethod.GET)
-	public String deleteHospitalHandler(@RequestParam("hospId") int hospId, Model model) {
+	public String deleteHospitalHandler(@RequestParam("hospId") int hospId, Model model,
+			@SessionAttribute("name") String name) {
 		hospitalService.deleteHospital(hospId);
-		return viewAllHospitalsPage(model);
+		return viewAllHospitalsPage(model, name);
 
 	}
 
@@ -143,9 +153,10 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/statusUpdate" }, method = RequestMethod.GET)
-	public String updateHospitalStatus(@RequestParam("hospId") int hospId, Model model) {
+	public String updateHospitalStatus(@RequestParam("hospId") int hospId, Model model,
+			@SessionAttribute("name") String name) {
 		hospitalService.updateHosptialStatus(hospId);
-		return viewAllHospitalsPage(model);
+		return viewAllHospitalsPage(model, name);
 
 	}
 

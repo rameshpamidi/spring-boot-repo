@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.dotridge.nhc.entity.UserProfile;
 import com.dotridge.nhc.model.HospitalBean;
@@ -24,6 +25,7 @@ import com.dotridge.nhc.service.UserDetailsService;
  * The Class LoginController.
  */
 @Controller
+@SessionAttributes(names = { "name" })
 public class LoginController {
 
 	public static Logger logger = Logger.getLogger(LoginController.class);
@@ -64,7 +66,7 @@ public class LoginController {
 					&& user.getPassword().equals(loginForm.getPassword())) {
 				switch (user.getUserName().toUpperCase()) {
 				case "SUPERADMIN":
-					model.addAttribute("name",user.getFullName());
+					model.addAttribute("name", user.getFullName());
 					viewPage = superAdminDashBoard(model);
 					break;
 				case "ADMIN":
@@ -94,14 +96,19 @@ public class LoginController {
 	 *            the request
 	 * @return the string
 	 */
-	/*
-	 * @RequestMapping(value = { "/logout" }, method = RequestMethod.GET) public
-	 * String logoutAction(HttpServletRequest request, Model model) { if
-	 * (request.getSession(false) != null) {
-	 * request.getSession(false).invalidate(); model.addAttribute("loginForm",
-	 * new LoginBean()); return "redirect:/"; } else { System.out.println(
-	 * "logout failed"); return null; } }
-	 */
+
+	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
+	public String logoutAction(HttpServletRequest request, Model model) {
+		if (request.getSession(false) != null) {
+			request.getSession(false).invalidate();
+			model.addAttribute("loginForm", new LoginBean());
+			return "redirect:/loginPage";
+		} else {
+			System.out.println("logout failed");
+			return null;
+		}
+	}
+
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
 	public String superAdminDashBoard(Model model) {
 		logger.debug("[superadmin dashboard handler method]--> execution started..!");

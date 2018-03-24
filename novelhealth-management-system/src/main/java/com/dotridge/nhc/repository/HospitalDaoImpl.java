@@ -49,7 +49,9 @@ public class HospitalDaoImpl implements HospitalDao {
 	@Override
 	public Hospital updateHospital(Hospital hospital) {
 		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		session.beginTransaction();
 		session.update(hospital);
+		session.getTransaction().commit();
 		System.out.println(hospital);
 		return hospital;
 	}

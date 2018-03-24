@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dotridge.nhc.model.HospitalBean;
 import com.dotridge.nhc.service.HospitalService;
 
-
 /**
  * The Class HomeController.
  */
