@@ -2,24 +2,18 @@ package com.dotridge.nhc.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.dotridge.nhc.entity.UserProfile;
 import com.dotridge.nhc.model.HospitalBean;
-import com.dotridge.nhc.model.LoginBean;
 import com.dotridge.nhc.service.HospitalService;
-import com.dotridge.nhc.service.UserDetailsService;
 
 /**
  * The Class LoginController.
@@ -30,8 +24,6 @@ public class LoginController {
 
 	public static Logger logger = Logger.getLogger(LoginController.class);
 
-	@Autowired
-	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private HospitalService hospitalService;
@@ -43,17 +35,17 @@ public class LoginController {
 	 *            the model
 	 * @return the string
 	 */
-	@RequestMapping(value = { "/loginPage" }, method = RequestMethod.GET)
+	@GetMapping(value = {"/", "/loginPage" })
 	public String showLoginForm(Model model) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("[show loginform handler method]--> execution started..!");
 			logger.info("loginPage handler rendering requested view page");
 		}
-		model.addAttribute("loginForm", new LoginBean());
+		//model.addAttribute("loginForm", new LoginBean());
 		return "loginpage/loginPage";
 	}
 
-	@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
+	/*@RequestMapping(value = { "/login" }, method = RequestMethod.POST)
 	public String submitLoginForm(@Valid @ModelAttribute("loginForm") LoginBean loginForm, BindingResult result,
 			HttpServletRequest request, Model model) {
 		String viewPage = null;
@@ -88,7 +80,7 @@ public class LoginController {
 		return viewPage;
 
 	}
-
+*/
 	/**
 	 * Logout action.
 	 *
@@ -97,7 +89,7 @@ public class LoginController {
 	 * @return the string
 	 */
 
-	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
+/*	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
 	public String logoutAction(HttpServletRequest request, Model model) {
 		if (request.getSession(false) != null) {
 			request.getSession(false).invalidate();
@@ -108,18 +100,20 @@ public class LoginController {
 			return null;
 		}
 	}
-
+*/
+	
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
-	public String superAdminDashBoard(Model model) {
+	public String DashBoard(Model model) {
 		logger.debug("[superadmin dashboard handler method]--> execution started..!");
 		logger.debug("retrieving authenticated user principal from request scope");
-
+         String[] name = SecurityContextHolder.getContext().getAuthentication().getName().split("@");
 		String viewPage = null;
 		logger.debug("getting all hospitals to show on superadmin dashboard");
 		List<HospitalBean> allHospitals = hospitalService.getAllHospitals();
 		if (allHospitals != null) {
 			logger.info("successfully retrived existed hospitals ");
 			logger.info("retrived hospitals from database are:" + allHospitals.toString());
+			model.addAttribute("name", name[0].toString());
 			model.addAttribute("totalhospitals", allHospitals.size());
 			logger.debug("binding count of hospitals to model object");
 			logger.debug("binding user name  to model object");

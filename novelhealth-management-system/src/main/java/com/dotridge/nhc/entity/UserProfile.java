@@ -49,8 +49,8 @@ public class UserProfile implements Serializable {
 	@Column(name = "gender", nullable = false)
 	private String gender;
 
-	@Column(name = "status", nullable = false)
-	private boolean status;
+	@Column(name = "active", nullable = false)
+	private boolean active;
 
 	@Column(name = "no_of_attempts", nullable = true)
 	private int noOfLoginAttempts;
@@ -157,11 +157,11 @@ public class UserProfile implements Serializable {
 	}
 
 	public boolean getStatus() {
-		return status;
+		return active;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setStatus(boolean active) {
+		this.active = active;
 	}
 
 	public int getNoOfLoginAttempts() {
@@ -175,8 +175,8 @@ public class UserProfile implements Serializable {
 	@Override
 	public String toString() {
 		return "UserProfile [userId=" + userId + ", fullName=" + fullName + ", userName=" + userName + ", password="
-				+ password + ", email=" + email + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", status="
-				+ status + ", noOfLoginAttempts=" + noOfLoginAttempts + ", lastAttempt=" + lastAttempt + ", address="
+				+ password + ", email=" + email + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", active="
+				+ active + ", noOfLoginAttempts=" + noOfLoginAttempts + ", lastAttempt=" + lastAttempt + ", address="
 				+ address + ", roles=" + roles + "]";
 	}
 
@@ -193,7 +193,7 @@ public class UserProfile implements Serializable {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (int) (phoneNumber ^ (phoneNumber >>> 32));
 		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
-		result = prime * result + (status ? 1231 : 1237);
+		result = prime * result + (active ? 1231 : 1237);
 		result = prime * result + userId;
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
@@ -247,7 +247,7 @@ public class UserProfile implements Serializable {
 				return false;
 		} else if (!roles.equals(other.roles))
 			return false;
-		if (status != other.status)
+		if (active != other.active)
 			return false;
 		if (userId != other.userId)
 			return false;

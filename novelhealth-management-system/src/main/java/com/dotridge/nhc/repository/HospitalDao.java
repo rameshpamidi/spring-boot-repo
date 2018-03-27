@@ -8,6 +8,7 @@ import com.dotridge.nhc.entity.HospitalBranch;
 /**
  * The Interface HospitalDao.
  */
+
 public interface HospitalDao {
 
 	/**

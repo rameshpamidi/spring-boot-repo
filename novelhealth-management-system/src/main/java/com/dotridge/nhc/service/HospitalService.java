@@ -2,6 +2,8 @@ package com.dotridge.nhc.service;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.dotridge.nhc.model.BranchBean;
 import com.dotridge.nhc.model.HospitalBean;
 
@@ -21,7 +23,6 @@ public interface HospitalService {
 	 *            the hosptial form
 	 * @return the hospital form
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public HospitalBean addHospital(HospitalBean hospitalBean);
 
 	/**
@@ -31,7 +32,6 @@ public interface HospitalService {
 	 *            the branch
 	 * @return the hospital form
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public BranchBean addHospitalBranch(BranchBean branch, final int hospId);
 
 	/**
@@ -41,7 +41,6 @@ public interface HospitalService {
 	 *            the hospital form
 	 * @return the hospital form
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public HospitalBean updateHospital(HospitalBean hospitalBean);
 
 	/**
@@ -51,7 +50,6 @@ public interface HospitalService {
 	 *            the branch
 	 * @return the hospital form
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public BranchBean updateHospitalBranch(BranchBean branch);
 
 	/**
@@ -60,7 +58,6 @@ public interface HospitalService {
 	 * @param hospitalId
 	 *            the hospital id
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public void deleteHospital(final int hospitalId);
 
 	/**
@@ -69,7 +66,6 @@ public interface HospitalService {
 	 * @param branchId
 	 *            the branch id
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
 	public void deleteHospitalBranch(final int branchId, final int hospId);
 
 	/**
@@ -79,7 +75,6 @@ public interface HospitalService {
 	 *            the hosp id
 	 * @return the hospital by id
 	 */
-	/* @PreAuthorize("hasRole('superadmin') or hasRole('admin')") */
 	public HospitalBean getHospitalById(final int hospId);
 
 	/**
@@ -89,7 +84,6 @@ public interface HospitalService {
 	 *            the hosp id
 	 * @return the hospital branch by id
 	 */
-	/* @PreAuthorize("hasRole('superadmin') or hasRole('admin')") */
 	public BranchBean getHospitalBranchById(final int hospId);
 
 	/**
@@ -97,7 +91,7 @@ public interface HospitalService {
 	 *
 	 * @return the all hospitals
 	 */
-	/* @PreAuthorize("hasRole('superadmin') or hasRole('admin')") */
+	@PreAuthorize("hasRole('ROLE_SUPERADMIN')") 
 	public List<HospitalBean> getAllHospitals();
 
 	/**
@@ -107,7 +101,7 @@ public interface HospitalService {
 	 *            the hospital id
 	 * @return the all branches
 	 */
-	/* @PreAuthorize("hasRole('superadmin') or hasRole('admin')") */
+	
 	public List<BranchBean> getAllBranches(final int hospitalId);
 
 	/**
@@ -116,7 +110,7 @@ public interface HospitalService {
 	 * @param hospId
 	 *            the hosp id
 	 */
-	/* @PreAuthorize("hasRole('superadmin')") */
+	 @PreAuthorize("hasRole('superadmin')") 
 	public void updateHosptialStatus(final int hospId);
 
 }

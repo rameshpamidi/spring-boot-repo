@@ -1,6 +1,6 @@
 
 INSERT INTO `novelhealthcare_db`.`address`(address_id,address1,address2,city,state,zipcode) VALUES (1,"doorno:3-12","ameerpet","hyderabad","telangana",500072);
-INSERT INTO `novelhealthcare_db`.`user_profile`(`full_name`,`user_name`,`password`,`phone_no`,`email`,`gender`,`status`,`no_of_attempts`,`address_id_fk`) VALUES ('ramesh pamidi','superadmin','12345',9959890915,'superadmin@gmail.com','male',1,0,1);
+INSERT INTO `novelhealthcare_db`.`user_profile`(`full_name`,`user_name`,`password`,`phone_no`,`email`,`gender`,`active`,`no_of_attempts`,`address_id_fk`) VALUES ('ramesh pamidi','superadmin','12345',9959890915,'superadmin@gmail.com','male',1,0,1);
 
 
 INSERT INTO `novelhealthcare_db`.`role` (`role_id`,`role_name`) VALUES ('1','superadmin');
