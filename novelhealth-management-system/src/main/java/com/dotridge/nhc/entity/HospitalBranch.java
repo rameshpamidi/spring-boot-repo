@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
  * The Class Branch.
  */
 @Entity
-@Table(name="branch")
+@Table(name = "branch")
 
 public class HospitalBranch implements Serializable {
 
@@ -24,48 +24,48 @@ public class HospitalBranch implements Serializable {
 	private static final long serialVersionUID = 719301118905053089L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="branch_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "branch_id")
 	private int branchId;
-	
-	@Column(name="address1",nullable=false)
+
+	@Column(name = "address1", nullable = false)
 	private String address1;
-	
-	@Column(name="address2",nullable=true)
+
+	@Column(name = "address2", nullable = true)
 	private String address2;
-	
-	@Column(name="city",nullable=false)
+
+	@Column(name = "city", nullable = false)
 	private String city;
-	
-	@Column(name="state",nullable=false)
+
+	@Column(name = "state", nullable = false)
 	private String state;
-	
-	@Column(name="zipcode",nullable=false)
+
+	@Column(name = "zipcode", nullable = false)
 	private String zipCode;
-	
-	@Column(name="email",nullable=false)
+
+	@Column(name = "email", nullable = false)
 	private String email;
-	
-	@Column(name="phone",nullable=false)
+
+	@Column(name = "phone", nullable = false)
 	private String phoneNo;
-	
-	@Column(name="image",nullable=true)
+
+	@Column(name = "image", nullable = true)
 	private String image;
-	
-	@Column(name="created_by",nullable=true)
-	private String  createdBy;
-	
+
+	@Column(name = "created_by", nullable = true)
+	private String createdBy;
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="created_date",nullable=true)
+	@Column(name = "created_date", nullable = true)
 	private Date createdDate;
-	
-	@Column(name="updated_by",nullable=true)
+
+	@Column(name = "updated_by", nullable = true)
 	private String updatedBy;
-	
+
 	@Temporal(TemporalType.DATE)
-	@Column(name="updated_date",nullable=true)
+	@Column(name = "updated_date", nullable = true)
 	private Date updatedDate;
-	
+
 	public int getBranchId() {
 		return branchId;
 	}
@@ -130,7 +130,6 @@ public class HospitalBranch implements Serializable {
 		this.phoneNo = phoneNo;
 	}
 
-	
 	public String getEmail() {
 		return email;
 	}
@@ -215,7 +214,5 @@ public class HospitalBranch implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

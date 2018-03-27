@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dotridge.nhc.entity.Hospital;
 import com.dotridge.nhc.entity.HospitalBranch;
@@ -20,6 +21,7 @@ import com.dotridge.nhc.entity.HospitalBranch;
  * The Class HospitalDaoImpl.
  */
 @Repository("hospitalDao")
+@Transactional
 public class HospitalDaoImpl implements HospitalDao {
 
 	/** The session factory. */
@@ -29,7 +31,7 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public Hospital addHospital(Hospital hospital) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		session.save(hospital);
 		System.out.println(hospital);
 		return hospital;
@@ -39,7 +41,7 @@ public class HospitalDaoImpl implements HospitalDao {
 	public HospitalBranch addHospitalBranch(HospitalBranch branch, final int hospId) {
 
 		hospitalBranches.add(branch);
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		Hospital hospital = (Hospital) session.get(Hospital.class, hospId);
 		hospital.getBranches().add(branch);
 		session.update(hospital);
@@ -48,17 +50,15 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public Hospital updateHospital(Hospital hospital) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
-		session.beginTransaction();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		session.update(hospital);
-		session.getTransaction().commit();
 		System.out.println(hospital);
 		return hospital;
 	}
 
 	@Override
 	public HospitalBranch updateHospitalBranch(HospitalBranch branch) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		session.update(branch);
 		return branch;
 
@@ -66,13 +66,13 @@ public class HospitalDaoImpl implements HospitalDao {
 
 	@Override
 	public void deleteHospital(int hospitalId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		session.delete(session.get(Hospital.class, hospitalId));
 	}
 
 	@Override
 	public void deleteHospitalBranch(int branchId, int hospId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		Hospital hospital = (Hospital) session.get(Hospital.class, hospId);
 		List<HospitalBranch> branches = hospital.getBranches();
 		for (Iterator<HospitalBranch> iterator = branches.iterator(); iterator.hasNext();) {
@@ -81,37 +81,35 @@ public class HospitalDaoImpl implements HospitalDao {
 				iterator.remove();
 			}
 		}
-		session.beginTransaction();
 		hospital.setBranches(branches);
 		session.update(hospital);
-		session.getTransaction().commit();
-		
+
 	}
 
 	@Override
 	public Hospital getHospitalById(int hospId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		Hospital hospital = (Hospital) session.load(Hospital.class, hospId);
 		System.out.println(hospital);
-		
+
 		return hospital;
 	}
 
 	@Override
 	public HospitalBranch getBranchById(int branchId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		HospitalBranch hospitalBranch = (HospitalBranch) session.get(HospitalBranch.class, branchId);
-		
+
 		return hospitalBranch;
 	}
 
 	@Override
 	public List<HospitalBranch> getAllBranches(final int hospitalId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		SQLQuery query = session.createSQLQuery(
 				"select hb.*,b.* from hospital_branch hb inner join branch b on hb.branch_id_fk=b.branch_id where hb.hospital_id_fk=:hospitalId");
 		query.setParameter("hospitalId", hospitalId);
-		//query.setCacheable(true);
+		// query.setCacheable(true);
 		query.addEntity(HospitalBranch.class);
 		@SuppressWarnings("unchecked")
 		List<HospitalBranch> branches = query.list();
@@ -121,16 +119,16 @@ public class HospitalDaoImpl implements HospitalDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Hospital> getAllHospitals() {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		Query query = session.createQuery("from Hospital");
-		//query.setCacheable(true);
+		// query.setCacheable(true);
 		List<Hospital> hospitals = query.list();
 		return hospitals;
 	}
 
 	@Override
 	public void updateHospitalStatus(final int hospId) {
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
 		Hospital hospital = (Hospital) session.get(Hospital.class, hospId);
 		if (hospital.isStatus() == false) {
 			hospital.setStatus(true);

@@ -35,7 +35,7 @@
 			<table class="table table-bordered table-striped datatable" id="hospitals-table">
 				<thead>
 					<tr>
-						<th>Image</th>
+						<!-- <th>Image</th> -->
 						<th>Hospital Name</th>
 						<th>websiteURL</th>
 						<th>Status</th>
@@ -48,7 +48,7 @@
 						<c:when test="${hospitals.size()>=1}">
 							<c:forEach items="${hospitals}" var="hospital">
 								<tr>
-									<td><img src="http://creativeitem.com/demo/bayanno/uploads/doctor_image/1.jpg" class="img-circle" width="40px" height="40px"></td>
+									<!-- <td><img src="http://creativeitem.com/demo/bayanno/uploads/doctor_image/1.jpg" class="img-circle" width="40px" height="40px"></td> -->
 									<td>${hospital.hospitalName}</td>
 									<td><a href="${hospital.websiteUrl}">${hospital.websiteUrl}</a></td>
 									<c:choose>
@@ -63,7 +63,7 @@
 										<!-- <a onclick="showAjaxModal('http://localhost:8080/novelheathcare//addhospitalpage');" class="btn btn-info btn-sm"> <i
 											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./edithospitalpage?hospId=${hospital.hospitalId}" class="btn btn-info btn-sm"> <i
 											class="fa fa-pencil"></i>&nbsp;Edit
-									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deletehospital?hospId=${hospital.hospitalId}')"
+									</a> <a onclick="confirm_modal('./deletehospital?hospId=${hospital.hospitalId}')"
 										class="btn btn-danger btn-sm"> <i class="fa fa-trash-o"></i>&nbsp;Delete
 									</a> <a href="./viewbranches?hospId=${hospital.hospitalId}&&hospName=${hospital.hospitalName}" class="btn btn-info btn-sm"> <i class="fa fa-eye"></i>&nbsp;View Branches
 									</a>

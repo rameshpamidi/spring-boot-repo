@@ -3,6 +3,8 @@ package com.dotridge.nhc.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dotridge.nhc.model.AdminBean;
@@ -16,31 +18,31 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	public AdminBean addAdmin(AdminBean adminBean) {
 		return  AdminServiceUtils.mapAdminDomainToAdminBean(adminDao.addAdmin(AdminServiceUtils.mapAdminBeanToAdminDomain(adminBean),adminBean.getHospitalId()));
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	public AdminBean updateAdmin(AdminBean adminBean) {
-		return null;
+		return  AdminServiceUtils.mapAdminDomainToAdminBean(adminDao.updateAdmin(AdminServiceUtils.mapAdminBeanToAdminDomain(adminBean)));
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	public AdminBean getAdminById(int adminId) {
 		return AdminServiceUtils.mapAdminDomainToAdminBean(adminDao.getAdminById(adminId));
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	public void deleteAdmin(int adminId) {
 
 	}
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.READ_COMMITTED)
 	public List<AdminBean> getAllAdmins() {
 		return AdminServiceUtils.mapAdminDomainsToAdminBeans(adminDao.getAllAdmins());
 	}

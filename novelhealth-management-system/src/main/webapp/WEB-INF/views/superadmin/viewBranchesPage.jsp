@@ -35,7 +35,7 @@
 			<table class="table table-bordered table-striped datatable" id="branches-table">
 				<thead>
 					<tr>
-						<th>Image</th>
+						<!-- <th>Image</th> -->
 						<th>Address1</th>
 						<th>Address2</th>
 						<th>City</th>
@@ -51,7 +51,7 @@
 						<c:when test="${branches.size()>=1}">
 							<c:forEach items="${branches}" var="branch">
 								<tr>
-									<td><img src="http://creativeitem.com/demo/bayanno/uploads/doctor_image/1.jpg" class="img-circle" width="40px" height="40px"></td>
+									<!-- <td><img src="http://creativeitem.com/demo/bayanno/uploads/doctor_image/1.jpg" class="img-circle" width="40px" height="40px"></td> -->
 									<td>${branch.address1}</td>
 									<td>${branch.address2}</td>
 									<td>${branch.city}</td>

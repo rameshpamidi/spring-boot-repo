@@ -13,7 +13,6 @@ public class BranchBean {
 	@NotEmpty
 	private String phoneNo;
 
-
 	private String image;
 
 	@NotEmpty
@@ -51,7 +50,6 @@ public class BranchBean {
 	public void setPhoneNo(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
-
 
 	public String getImage() {
 		return image;

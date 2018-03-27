@@ -2,7 +2,9 @@
 
 <script src='<spring:url value="/resources/js/jquery/jquery-ui-1.10.3.minimal.min.js"/>'></script>
 
-<script src='<spring:url value="/resources/js/bootstrap/bootstrap.js"/>'></script>
+<%-- <script src='<spring:url value="/resources/js/bootstrap/bootstrap.js"/>'></script> --%>
+
+<script src='<spring:url value="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"/>'></script>
 
 <script src='<spring:url value="/resources/js/common/joinable.js"/>'></script>
 

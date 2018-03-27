@@ -15,7 +15,7 @@
 <link rel="stylesheet" href='<spring:url value="/resources/css/common/entypo.css"/>'>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
-<link rel="stylesheet" href='<spring:url value="/resources/css/bootstrap/bootstrap.css"/>'>
+<link rel="stylesheet" href='<spring:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>'>
 <link rel="stylesheet" href='<spring:url value="/resources/css/common/neon-core.css"/>'>
 <link rel="stylesheet" href='<spring:url value="/resources/css/common/neon-core.css"/>'>
 <link rel="stylesheet" href='<spring:url value="/resources/css/common/neon-forms.css"/>'>
@@ -33,7 +33,7 @@
 }
 </style>
 <!-- scripts -->
-<script src='<spring:url value="/resources/js/jquery/jquery.min.js"/>'></script>
+<script src='<spring:url value="/webjars/jquery/1.11.1/jquery.min.js"/>'></script>
 <script>
 	function checkDelete() {
 		var chk = confirm("Are You Sure To Delete This !");

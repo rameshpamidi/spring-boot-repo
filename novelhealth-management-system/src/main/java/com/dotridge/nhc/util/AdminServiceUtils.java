@@ -18,7 +18,7 @@ public class AdminServiceUtils {
 		admin.setPassword(adminBean.getPassword());
 		admin.setPhoneNumber(adminBean.getPhoneNo());
 		admin.setGender(adminBean.getGender());
-		admin.setStatus(adminBean.isStatus());
+		admin.setStatus(adminBean.getStatus());
 		Address address=new Address();
 		address.setAddress1(adminBean.getAddress1());
 		address.setAddress2(adminBean.getAddress2());
@@ -32,7 +32,7 @@ public class AdminServiceUtils {
 	{
 		AdminBean adminBean=new AdminBean();
 		String names[]=new String[2];
-		 names = admin.getFullName().split("\\s");
+		 names = admin.getFullName().split("");
 		adminBean.setAdminId(admin.getUserId());
 		adminBean.setFirstName(names[0]);
 		adminBean.setLastName(names[1]);

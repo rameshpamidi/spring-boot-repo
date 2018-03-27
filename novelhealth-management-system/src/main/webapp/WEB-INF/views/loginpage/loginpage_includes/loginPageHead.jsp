@@ -7,7 +7,8 @@
 
 <link rel="shortcut icon" href='<spring:url value="/resources/images/favicon.png"/>'>
 
-<link rel="stylesheet" href='<spring:url value="/resources/css/bootstrap/bootstrap.css"/>'>
+<%-- <link rel="stylesheet" href='<spring:url value="/resources/css/bootstrap/bootstrap.css"/>'> --%>
+<link rel="stylesheet" href='<spring:url value="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>'>
 
 <link href='<spring:url value="/resources/css/common/font-awesome.min.css"/>' rel="stylesheet">
 

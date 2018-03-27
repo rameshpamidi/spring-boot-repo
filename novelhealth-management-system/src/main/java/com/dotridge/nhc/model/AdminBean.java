@@ -25,13 +25,13 @@ public class AdminBean {
 	private String password;
 	
 	@NotNull
-	private long phoneNo;
+	private Long phoneNo;
 	
 	@NotEmpty
 	private String gender;
 	
 	@NotNull
-	private boolean status;
+	private Boolean status;
 	
 	@NotEmpty
 	private String address1;
@@ -45,10 +45,10 @@ public class AdminBean {
 	private String state;
 	
 	@NotNull
-	private int zipCode;
+	private Integer zipCode;
 	
 	@NotNull
-	private int hospitalId;
+	private Integer hospitalId;
 
 	public int getAdminId() {
 		return adminId;
@@ -82,40 +82,6 @@ public class AdminBean {
 		this.email = email;
 	}
 
-	public long getPhoneNo() {
-		return phoneNo;
-	}
-	
-
-	public int getHospitalId() {
-		return hospitalId;
-	}
-
-	public void setHospitalId(int hospitalId) {
-		this.hospitalId = hospitalId;
-	}
-
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -130,6 +96,30 @@ public class AdminBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Long getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(Long phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	public String getAddress1() {
@@ -164,12 +154,21 @@ public class AdminBean {
 		this.state = state;
 	}
 
-	public int getZipCode() {
+	public Integer getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(int zipCode) {
+	public void setZipCode(Integer zipCode) {
 		this.zipCode = zipCode;
 	}
+
+	public Integer getHospitalId() {
+		return hospitalId;
+	}
+
+	public void setHospitalId(Integer hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
 
 }
