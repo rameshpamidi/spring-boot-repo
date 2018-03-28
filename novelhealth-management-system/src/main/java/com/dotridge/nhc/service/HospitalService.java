@@ -91,7 +91,7 @@ public interface HospitalService {
 	 *
 	 * @return the all hospitals
 	 */
-	@PreAuthorize("hasRole('ROLE_SUPERADMIN')") 
+	@PreAuthorize("hasAuthority('superadmin') or hasAuthority('admin')") 
 	public List<HospitalBean> getAllHospitals();
 
 	/**
@@ -110,7 +110,7 @@ public interface HospitalService {
 	 * @param hospId
 	 *            the hosp id
 	 */
-	 @PreAuthorize("hasRole('superadmin')") 
+	
 	public void updateHosptialStatus(final int hospId);
 
 }

@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled=true,securedEnabled=true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -38,8 +38,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/", "/loginPage").permitAll()
-		        .antMatchers("/superadmin/**")
-				.hasAuthority("SUPERADMIN").anyRequest().authenticated()
+		        //.antMatchers("/**").hasAuthority("superadmin")
 				.and()
 				.formLogin()
 				.loginPage("/")
