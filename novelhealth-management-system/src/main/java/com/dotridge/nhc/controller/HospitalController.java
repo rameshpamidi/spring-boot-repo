@@ -40,7 +40,7 @@ public class HospitalController {
 	public String addHospitalPage(Model model, @SessionAttribute("name") String name) {
 		model.addAttribute("name", name);
 		model.addAttribute("hospitalForm", new HospitalBean());
-		return "superadmin/addHospitalPage";
+		return "superadmin/addHospitalPage"; 
 	}
 
 	/**
