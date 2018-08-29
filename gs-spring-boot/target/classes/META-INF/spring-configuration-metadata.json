@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "hello.MessageConfigProperties",
+      "name": "message",
+      "type": "hello.MessageConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "hello.MessageConfigProperties",
+      "name": "message.greetings",
+      "type": "java.lang.String"
+    }
+  ]
+}
